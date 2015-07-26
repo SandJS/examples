@@ -1,0 +1,11 @@
+{
+  "name": "the-cheese-app",
+  "version": "0.0.0",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "sand": "^1.2.0",
+    "sand-grain": "^1.0.1"
+  }
+}
