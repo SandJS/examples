@@ -1,0 +1,8 @@
+{
+  "name": "your-http-app",
+  "version": "0.0.0",
+  "dependencies": {
+    "sand": "^1.2.0",
+    "sand-http": "=2.3.2"
+  }
+}
