@@ -1,4 +1,4 @@
-# Getting Started
+# Getting Started with Sand.js
 
 Welcome to the Getting Started guide! This guide assumes you have already installed [Node.js](https://nodejs.org).
 
@@ -62,10 +62,15 @@ A Sand "grain" is a plugin for the Sand.js Application.
 
 ## How grains work
 
-- A grain is an node module that exports a class extending `SandGrain` found in the [sand-grain](https://github.com/pocketly/sand-grain) module. 
-- The class implements member functions `init`, `start`, and `shutdown` callbacks which are invoked by the Sand Application. These callbacks may be used to load and dispose of any resources that the plugin provides to the application.
+- A grain is a node module that exports a class extending `SandGrain` found in the [sand-grain](https://github.com/pocketly/sand-grain) module. 
+- The class implements member functions `init`, `start`, and `shutdown` which are invoked by the Sand Application during its lifecycle. These hooks load and dispose of any resources that the plugin provides to the application.
 - In the `init()` hook, the grain loads it's config and sets it on the grain instance. 
-- During the `init` stage of the application, the Sand application creates a new instance of the grain, and sets it on the application instance so that it may be accessed from any file in the application in the syntax `sand.customGrain`.
+- During the `init` stage of the application, the Sand application creates a new instance of the grain, and sets it on the application instance. This means that the grain instance may be accessed from any file in the application using the syntax `sand.customGrain`.
+- Every grain documents it's 
+	- Configuration file name (i.e. `config/custom-grain.js`)
+	- Configuration options (i.e. `{ key1: "value1", ... }`)
+	- Global reference (i.e. `sand.customGrain`)
+	- If a "grain" doesn't document these, then bug the "grain" developer to document them or look at the grain source.
 
 ## How to use grains
 
@@ -73,10 +78,10 @@ To get started, create a project directory. This directory will be used for the 
 
 1. Ensure that the grain is installed.
 1. Create a directory named `config/`.
-1. In `config/`, create a file named `<custom-grain>.js`.
+1. In `config/`, create a file named `custom-grain.js`.
 
 ```JavaScript
-let CustomGrain = require('sand-<custom-grain>');
+let CustomGrain = require('sand-custom-grain');
 let Sand = require('sand');
 
 let app = new Sand() // initialize the application
