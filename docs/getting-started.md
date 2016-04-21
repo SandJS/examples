@@ -71,14 +71,11 @@ A Sand "grain" is a plugin for the Sand.js Application.
 	- Configuration options (i.e. `{ key1: "value1", ... }`)
 	- Global reference (i.e. `sand.customGrain`)
 	- If a "grain" doesn't document these, then bug the "grain" developer to document them or look at the grain source.
+- Sand grains may be loaded into an application using `app.use()`. Grains may not be loaded after `app.start()` has been called.
 
 ## How to use grains
 
-To get started, create a project directory. This directory will be used for the rest of this example.
-
-1. Ensure that the grain is installed.
-1. Create a directory named `config/`.
-1. In `config/`, create a file named `custom-grain.js`.
+Ensure that the grain is installed.
 
 ```JavaScript
 let CustomGrain = require('sand-custom-grain');
@@ -89,10 +86,13 @@ let app = new Sand() // initialize the application
 
 app.start(function () { // start the application
   console.log('Hello, World!');
+  console.log(sand.customGrain); // this should output the instance of the sand grain
 });
 ```
 
 The `Sand#use()` function loads a Sand Grain into the application.
 
-# A simple HTTP Web Application
+# Learn More
+
+Check out the [sand-http](https://github.com/SandJS/http) readme for an example of how Sand.js web applications work.
 
