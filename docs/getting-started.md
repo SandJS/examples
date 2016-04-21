@@ -52,23 +52,28 @@ The `require('sand')` loads the Sand Application class.
 
 To create a new application, simply instantiate the Sand Application class.
 
-Only once instance of a Sand application is allowed. When the Application has been instantiated, the `global.sand` variable will be set with that instance. All modules and application files will be able to references the main application instance by `global.sand` or just `sand`.
+Only one instance of a Sand application is allowed. When the Application has been instantiated, the `global.sand` variable will be set with that instance. All modules and application files will be able to reference the main application instance by `global.sand` or just `sand`.
 
 Passing a callback to `Sand#start()` will ensure that the code in your callback gets executed _after_ the application has started.
 
-# Using Grains
+# Sand Grains
 
 A Sand "grain" is a plugin for the Sand.js Application. 
 
-- A grain is an npm package that exports a class extending `SandGrain` found in the [sand-grain](https://github.com/pocketly/sand-grain). 
+## How grains work
+
+- A grain is an node module that exports a class extending `SandGrain` found in the [sand-grain](https://github.com/pocketly/sand-grain) module. 
 - The class implements member functions `init`, `start`, and `shutdown` callbacks which are invoked by the Sand Application. These callbacks may be used to load and dispose of any resources that the plugin provides to the application.
-- The class loads it's config from the `config` directory in the project and sets it on the class instance.
-- The Sand application creates a new instance of the grain, and sets it on the sand application instance so that it may be accessed from any file in the application in the syntax `sand.customGrain`.
+- In the `init()` hook, the grain loads it's config and sets it on the grain instance. 
+- During the `init` stage of the application, the Sand application creates a new instance of the grain, and sets it on the application instance so that it may be accessed from any file in the application in the syntax `sand.customGrain`.
 
+## How to use grains
 
-1. Ensure that the grain is installed in your project directory.
-1. In your project directory, create a directory named `config`.
-1. In that `config` directory, create a file named `<custom-grain>.js`.
+To get started, create a project directory. This directory will be used for the rest of this example.
+
+1. Ensure that the grain is installed.
+1. Create a directory named `config/`.
+1. In `config/`, create a file named `<custom-grain>.js`.
 
 ```JavaScript
 let CustomGrain = require('sand-<custom-grain>');
